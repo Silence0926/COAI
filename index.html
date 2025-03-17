@@ -3,57 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线钢琴</title>
+    <title>88键在线钢琴</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            text-align: center;
             background: #222;
-            margin: 0;
+            color: white;
+            font-family: Arial, sans-serif;
         }
         .piano {
             display: flex;
-            width: 90vw;
-            max-width: 1000px;
-        }
-        .key {
-            position: relative;
-            flex: 1;
-            height: 200px;
-            border: 1px solid black;
-            cursor: pointer;
+            justify-content: center;
             user-select: none;
         }
-        .white {
+        .key {
+            height: 150px;
+            border: 1px solid black;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+        }
+        .white-key {
+            width: 40px;
             background: white;
         }
-        .black {
+        .black-key {
+            width: 25px;
+            height: 100px;
             background: black;
-            height: 120px;
-            width: 60%;
             position: absolute;
-            top: 0;
             left: 70%;
-            z-index: 2;
+            z-index: 1;
+        }
+        .pressed {
+            background: yellow;
         }
     </style>
 </head>
 <body>
+    <h1>88键在线钢琴</h1>
     <div class="piano" id="piano"></div>
-
     <script>
-        const piano = document.getElementById("piano");
-        const whiteKeys = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-        const blackKeys = ['C#', 'D#', '', 'F#', 'G#', 'A#', ''];
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let currentOctave = 4;
         
-        for (let i = 0; i < 52; i++) {
-            const key = document.createElement("div");
-            key.classList.add("key", "white");
-            key.textContent = whiteKeys[i % 7];
-            piano.appendChild(key);
+        const keyMap = {
+            'a': 'C', 'w': 'C#', 's': 'D', 'e': 'D#', 'd': 'E', 'f': 'F', 't': 'F#', 'g': 'G', 'y': 'G#', 'h': 'A', 'u': 'A#', 'j': 'B', 'k': 'C'
+        };
+        
+        function createPiano() {
+            const piano = document.getElementById('piano');
+            const keys = ["A0", "A#0", "B0", ...Array.from({ length: 7 }, (_, i) => ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"].map(n => n + (i+1))).flat(), "C8"];
+            
+            keys.forEach((note, i) => {
+                const key = document.createElement("div");
+                key.classList.add("key", note.includes("#") ? "black-key" : "white-key");
+                key.dataset.note = note;
+                key.style.left = note.includes("#") ? `${(i - Math.floor(i / 12)) * 40 - 12}px` : `${i * 40}px`;
+                key.addEventListener("mousedown", () => playNote(note));
+                piano.appendChild(key);
+            });
         }
+        
+        function getFrequency(note) {
+            const A4 = 440;
+            const semitoneRatio = Math.pow(2, 1 / 12);
+            const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+            const octave = parseInt(note.slice(-1));
+            const keyNumber = notes.indexOf(note.slice(0, -1));
+            const n = keyNumber + (octave - 4) * 12;
+            return A4 * Math.pow(semitoneRatio, n);
+        }
+        
+        function playNote(note) {
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.frequency.value = getFrequency(note);
+            osc.type = "sine";
+            gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1);
+            
+            document.querySelector(`.key[data-note='${note}']`).classList.add("pressed");
+            setTimeout(() => document.querySelector(`.key[data-note='${note}']`).classList.remove("pressed"), 200);
+        }
+        
+        createPiano();
     </script>
 </body>
 </html>
