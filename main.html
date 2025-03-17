@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线钢琴</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+        }
+        .piano {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .key {
+            width: 40px;
+            height: 150px;
+            border: 1px solid #000;
+            background: white;
+            display: inline-block;
+            position: relative;
+            margin: 0 2px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .black-key {
+            width: 30px;
+            height: 100px;
+            background: black;
+            position: absolute;
+            top: 0;
+            left: 25px;
+            z-index: 1;
+        }
+        .active {
+            background: yellow !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>在线钢琴</h1>
+    <div class="piano" id="piano"></div>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // 88键钢琴音符
+        const notes = [
+            'A0', 'A#0', 'B0', 'C1', 'C#1', 'D1', 'D#1', 'E1', 'F1', 'F#1', 'G1', 'G#1', 'A1', 'A#1', 'B1',
+            'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
+            'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'A#3', 'B3',
+            'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4', 'A4', 'A#4', 'B4',
+            'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5', 'A5', 'A#5', 'B5',
+            'C6', 'C#6', 'D6', 'D#6', 'E6', 'F6', 'F#6', 'G6', 'G#6', 'A6', 'A#6', 'B6',
+            'C7', 'C#7', 'D7', 'D#7', 'E7', 'F7', 'F#7', 'G7', 'G#7', 'A7', 'A#7', 'B7', 'C8'
+        ];
+
+        const piano = document.getElementById("piano");
+
+        // 生成钢琴键
+        notes.forEach(note => {
+            const key = document.createElement("div");
+            key.classList.add("key");
+            key.textContent = note;
+            if (note.includes("#")) key.classList.add("black-key");
+            key.dataset.note = note;
+            piano.appendChild(key);
+        });
+
+        // 获取音符频率
+        function getFrequency(note) {
+            const A4 = 440;
+            const semitone = 12;
+            const noteIndex = notes.indexOf(note) - notes.indexOf("A4");
+            return A4 * Math.pow(2, noteIndex / semitone);
+        }
+
+        // 播放音符
+        function playNote(note) {
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            osc.type = "sine";
+            osc.frequency.value = getFrequency(note);
+
+            gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1);
+        }
+
+        // 绑定点击事件
+        document.querySelectorAll(".key").forEach(key => {
+            key.addEventListener("mousedown", () => {
+                playNote(key.dataset.note);
+                key.classList.add("active");
+                setTimeout(() => key.classList.remove("active"), 200);
+            });
+        });
+    </script>
+</body>
+</html>
