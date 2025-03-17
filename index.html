@@ -1,77 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在线钢琴</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(to bottom, #0f172a, #1e293b);
-            margin: 0;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: white;
-            margin-bottom: 20px;
-        }
-        .piano {
-            display: flex;
-            position: relative;
-            padding: 10px;
-            background: black;
-            border-radius: 10px;
-        }
-        .key {
-            width: 40px;
-            height: 200px;
-            border: 1px solid black;
-            background: white;
-            display: inline-block;
-            position: relative;
-        }
-        .black-key {
-            width: 25px;
-            height: 120px;
-            background: black;
-            position: absolute;
-            z-index: 2;
-            border-radius: 5px;
-        }
-        /* 黑键位置调整 */
-        .black-key:nth-child(2) { left: 30px; }
-        .black-key:nth-child(5) { left: 70px; }
-        .black-key:nth-child(7) { left: 130px; }
-        .black-key:nth-child(10) { left: 170px; }
-        .black-key:nth-child(12) { left: 210px; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>在线钢琴</h1>
-    <div class="piano">
-        <!-- 白键 -->
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <!-- 黑键 -->
-        <div class="black-key"></div>
-        <div class="black-key"></div>
-        <div class="black-key"></div>
-        <div class="black-key"></div>
-        <div class="black-key"></div>
+    <div class="container">
+        <h1>在线钢琴</h1>
+        <div class="piano">
+            <div class="key white" data-note="C"></div>
+            <div class="key black" data-note="C#"></div>
+            <div class="key white" data-note="D"></div>
+            <div class="key black" data-note="D#"></div>
+            <div class="key white" data-note="E"></div>
+            <div class="key white" data-note="F"></div>
+            <div class="key black" data-note="F#"></div>
+            <div class="key white" data-note="G"></div>
+            <div class="key black" data-note="G#"></div>
+            <div class="key white" data-note="A"></div>
+            <div class="key black" data-note="A#"></div>
+            <div class="key white" data-note="B"></div>
+            <div class="key white" data-note="C2"></div>
+        </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
