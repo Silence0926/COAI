@@ -6,84 +6,72 @@
     <title>在线钢琴</title>
     <style>
         body {
-            margin: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            background: linear-gradient(to bottom, #1a1a2e, #16213e);
-            color: white;
-            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            margin: 0;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
         }
-        .title {
-            font-size: 2rem;
-            font-weight: bold;
+        h1 {
+            color: white;
             margin-bottom: 20px;
         }
         .piano {
             display: flex;
             position: relative;
-            background: #222;
             padding: 10px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            background: black;
+            border-radius: 10px;
         }
         .key {
-            position: relative;
-            width: 50px;
-            height: 180px;
-            border-radius: 5px;
+            width: 40px;
+            height: 200px;
             border: 1px solid black;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            font-size: 14px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s;
-        }
-        .white-key {
             background: white;
-            box-shadow: inset 0px -3px 5px rgba(0, 0, 0, 0.2);
-        }
-        .white-key:active {
-            background: #ddd;
-            transform: scaleY(0.97);
+            display: inline-block;
+            position: relative;
         }
         .black-key {
-            background: black;
-            color: white;
+            width: 25px;
             height: 120px;
-            width: 35px;
+            background: black;
             position: absolute;
-            top: 0;
-            left: 37px;
             z-index: 2;
-            border-radius: 5px 5px 3px 3px;
-            box-shadow: inset 0px -3px 5px rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
         }
-        .black-key:active {
-            background: #444;
-            transform: scaleY(0.95);
-        }
+        /* 黑键位置调整 */
+        .black-key:nth-child(2) { left: 30px; }
+        .black-key:nth-child(5) { left: 70px; }
+        .black-key:nth-child(7) { left: 130px; }
+        .black-key:nth-child(10) { left: 170px; }
+        .black-key:nth-child(12) { left: 210px; }
     </style>
 </head>
 <body>
-    <div class="title">在线钢琴</div>
+    <h1>在线钢琴</h1>
     <div class="piano">
-        <div class="key white-key">C</div>
-        <div class="key black-key">C#</div>
-        <div class="key white-key">D</div>
-        <div class="key black-key">D#</div>
-        <div class="key white-key">E</div>
-        <div class="key white-key">F</div>
-        <div class="key black-key">F#</div>
-        <div class="key white-key">G</div>
-        <div class="key black-key">G#</div>
-        <div class="key white-key">A</div>
-        <div class="key black-key">A#</div>
-        <div class="key white-key">B</div>
+        <!-- 白键 -->
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <div class="key"></div>
+        <!-- 黑键 -->
+        <div class="black-key"></div>
+        <div class="black-key"></div>
+        <div class="black-key"></div>
+        <div class="black-key"></div>
+        <div class="black-key"></div>
     </div>
 </body>
 </html>
