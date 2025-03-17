@@ -6,88 +6,84 @@
     <title>在线钢琴</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f3e7d9;
             margin: 0;
-        }
-        .piano-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
-            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: white;
+            font-family: 'Poppins', sans-serif;
         }
-        .keyboard {
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .piano {
             display: flex;
-            width: 90vw;
-            max-width: 1200px;
-            user-select: none;
+            position: relative;
+            background: #222;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
         .key {
-            height: 150px;
-            flex: 1;
-            border: 1px solid black;
             position: relative;
+            width: 50px;
+            height: 180px;
+            border-radius: 5px;
+            border: 1px solid black;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             font-size: 14px;
             cursor: pointer;
+            user-select: none;
+            transition: all 0.1s;
         }
-        .white {
+        .white-key {
             background: white;
+            box-shadow: inset 0px -3px 5px rgba(0, 0, 0, 0.2);
         }
-        .black {
+        .white-key:active {
+            background: #ddd;
+            transform: scaleY(0.97);
+        }
+        .black-key {
             background: black;
-            height: 100px;
-            width: 60%;
+            color: white;
+            height: 120px;
+            width: 35px;
             position: absolute;
             top: 0;
-            left: 60%;
-            z-index: 1;
-            color: white;
+            left: 37px;
+            z-index: 2;
+            border-radius: 5px 5px 3px 3px;
+            box-shadow: inset 0px -3px 5px rgba(255, 255, 255, 0.2);
         }
-        .key.active {
-            background: lightgray;
+        .black-key:active {
+            background: #444;
+            transform: scaleY(0.95);
         }
     </style>
 </head>
 <body>
-    <h1>在线钢琴</h1>
-    <div class="piano-container">
-        <div class="keyboard" id="keyboard"></div>
+    <div class="title">在线钢琴</div>
+    <div class="piano">
+        <div class="key white-key">C</div>
+        <div class="key black-key">C#</div>
+        <div class="key white-key">D</div>
+        <div class="key black-key">D#</div>
+        <div class="key white-key">E</div>
+        <div class="key white-key">F</div>
+        <div class="key black-key">F#</div>
+        <div class="key white-key">G</div>
+        <div class="key black-key">G#</div>
+        <div class="key white-key">A</div>
+        <div class="key black-key">A#</div>
+        <div class="key white-key">B</div>
     </div>
-    <script>
-        const notes = [
-            'A0', 'A#0', 'B0', 'C1', 'C#1', 'D1', 'D#1', 'E1', 'F1', 'F#1', 'G1', 'G#1',
-            'A1', 'A#1', 'B1', 'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2',
-            'A2', 'A#2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3',
-            'A3', 'A#3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4', 'G#4',
-            'A4', 'A#4', 'B4', 'C5', 'C#5', 'D5', 'D#5', 'E5', 'F5', 'F#5', 'G5', 'G#5',
-            'A5', 'A#5', 'B5', 'C6', 'C#6', 'D6', 'D#6', 'E6', 'F6', 'F#6', 'G6', 'G#6',
-            'A6', 'A#6', 'B6', 'C7', 'C#7', 'D7', 'D#7', 'E7', 'F7', 'F#7', 'G7', 'G#7',
-            'A7', 'A#7', 'B7', 'C8'
-        ];
-        const keyboard = document.getElementById("keyboard");
-
-        notes.forEach(note => {
-            const key = document.createElement("div");
-            key.classList.add("key");
-            if (note.includes("#")) {
-                key.classList.add("black");
-            } else {
-                key.classList.add("white");
-            }
-            key.innerText = note;
-            key.addEventListener("mousedown", () => playNote(note, key));
-            keyboard.appendChild(key);
-        });
-
-        function playNote(note, key) {
-            key.classList.add("active");
-            setTimeout(() => key.classList.remove("active"), 200);
-        }
-    </script>
 </body>
 </html>
