@@ -1,51 +1,94 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 页面背景 */
+body {
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
+
 /* 导航栏样式 */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%; /* 让导航栏占满整个屏幕宽度 */
-    height: 100px;
-    background: rgba(0, 0, 0, 0.8); /* 半透明背景 */
-    padding: 10px 20px;
+nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #222;
+    padding: 10px 20px;
 }
 
-/* Logo 样式 */
 .logo img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain; /* 保持原始比例 */
+    height: 60px;
+    object-fit: contain;
 }
 
-/* 导航栏样式 */
+/* 导航菜单 */
 nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     padding: 0;
     margin: 0;
 }
 
-/* 导航项 */
+nav ul li {
+    display: inline-block;
+}
+
 nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px; /* 适当增加 */
-    height: 80px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    transition: 0.3s;
 }
 
-/* 导航图片样式 */
+nav ul li a:hover {
+    color: #00aaff;
+}
+
+/* “关于我们”图片 */
 nav ul li a img {
-    width: 60px; /* 让图片稍微小一点 */
-    height: 60px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
+    width: 100px;
+    height: auto;
 }
 
-/* 鼠标悬停放大效果 */
-nav ul li a:hover img {
-    transform: scale(1.1);
+/* 主标题 */
+h1 {
+    margin: 20px 0;
+    font-size: 28px;
+}
+
+/* 钢琴容器 */
+.piano-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 按钮 */
+.controls {
+    margin-top: 20px;
+}
+
+.controls button {
+    background: #0055ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.controls button:hover {
+    background: #0033aa;
 }
