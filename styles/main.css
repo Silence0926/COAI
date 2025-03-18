@@ -1,13 +1,13 @@
 header {
-    background: #222;
+    background: black;
     padding: 10px 20px;
     display: flex;
-    align-items: center;
+    align-items: center; /* 确保 Logo 和导航栏居中对齐 */
     justify-content: space-between;
 }
 
 .logo img {
-    height: 200px;
+    height: 100px;
 }
 
 nav ul {
@@ -15,6 +15,8 @@ nav ul {
     display: flex;
     align-items: center;
     gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -22,21 +24,20 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* 统一图片尺寸 */
+    height: 60px;
 }
 
-nav ul li a:hover {
-    color: #1e90ff;
+nav ul li a img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 防止图片变形 */
+    transition: transform 0.3s ease;
 }
 
-.about-icon {
-    width: 100px;
-    height: 100px;
-    margin-left: 8px;
-    vertical-align: middle;
+nav ul li a:hover img {
+    transform: scale(1.1); /* 鼠标悬停时图片放大 */
 }
-
