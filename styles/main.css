@@ -1,5 +1,9 @@
 header {
-    background: black;
+    position: fixed;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background: rgba;
     padding: 10px 20px;
     display: flex;
     align-items: center; /* 确保 Logo 和导航栏居中对齐 */
@@ -7,6 +11,7 @@ header {
 }
 
 .logo img {
+    width: 100px;
     height: 100px;
 }
 
@@ -32,8 +37,8 @@ nav ul li a {
 }
 
 nav ul li a img {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
     object-fit: contain; /* 防止图片变形 */
     transition: transform 0.3s ease;
 }
