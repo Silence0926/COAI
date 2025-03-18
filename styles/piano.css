@@ -1,27 +1,30 @@
-#piano {
+/* 🎹 钢琴外观 */
+.piano-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('../assets/images/水下柯哀.jpg'); /* 背景图片 */
+    background-size: cover;
+    background-position: center;
     display: flex;
-    position: relative;
-    height: 200px;
-    background: #222;
-    padding: 10px;
+    justify-content: center;
+    align-items: flex-end;
 }
 
-.key {
-    position: relative;
-    border: 1px solid #000;
-    cursor: pointer;
-    user-select: none;
-    transition: 0.1s;
-}
-
-.white {
+/* 🎼 白键 */
+.white-key {
     width: 50px;
     height: 200px;
     background: white;
+    border: 1px solid black;
     box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.1s;
 }
 
-.black {
+/* 🎵 黑键 */
+.black-key {
     width: 30px;
     height: 120px;
     background: black;
@@ -29,9 +32,16 @@
     margin-left: -15px;
     z-index: 2;
     box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.7);
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.1s;
 }
 
-.key:active {
+/* 🔥 悬停和按键点击效果 */
+.white-key:hover, .black-key:hover {
+    opacity: 1;
+}
+
+.white-key:active, .black-key:active {
     transform: scale(0.95);
     filter: brightness(1.2);
 }
