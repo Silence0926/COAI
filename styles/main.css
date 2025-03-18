@@ -7,7 +7,7 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    height: 200px;
 }
 
 nav ul {
@@ -34,8 +34,8 @@ nav ul li a:hover {
 }
 
 .about-icon {
-    width: 24px;
-    height: 24px;
+    width: 100px;
+    height: 100px;
     margin-left: 8px;
     vertical-align: middle;
 }
