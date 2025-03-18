@@ -1,20 +1,24 @@
+/* 导航栏样式 */
 header {
     position: fixed;
     top: 0;
-    width: 100px;
+    width: 100%; /* 让导航栏占满整个屏幕宽度 */
     height: 100px;
-    background: rgba;
+    background: rgba(0, 0, 0, 0.8); /* 半透明背景 */
     padding: 10px 20px;
     display: flex;
-    align-items: center; /* 确保 Logo 和导航栏居中对齐 */
+    align-items: center;
     justify-content: space-between;
 }
 
+/* Logo 样式 */
 .logo img {
     width: 100px;
     height: 100px;
+    object-fit: contain; /* 保持原始比例 */
 }
 
+/* 导航栏样式 */
 nav ul {
     list-style: none;
     display: flex;
@@ -24,25 +28,24 @@ nav ul {
     margin: 0;
 }
 
-nav ul li {
-    position: relative;
-}
-
+/* 导航项 */
 nav ul li a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px; /* 统一图片尺寸 */
-    height: 60px;
+    width: 80px; /* 适当增加 */
+    height: 80px;
 }
 
+/* 导航图片样式 */
 nav ul li a img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain; /* 防止图片变形 */
+    width: 60px; /* 让图片稍微小一点 */
+    height: 60px;
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
+/* 鼠标悬停放大效果 */
 nav ul li a:hover img {
-    transform: scale(1.1); /* 鼠标悬停时图片放大 */
+    transform: scale(1.1);
 }
